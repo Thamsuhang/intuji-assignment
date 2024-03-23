@@ -1,6 +1,11 @@
+body {
+    font-family: monospace;
+    background-color: #f5f5f5;
+}
 .event-section {
     padding: 10px;
 }
+
 .event-container {
     display: flex;
     flex-wrap: wrap;
@@ -12,7 +17,7 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 10px;
-    background-color: #f5f5f5;
+    background-color: white;
     color: #131313;
 }
 
@@ -23,10 +28,128 @@
 .event-card p {
     margin-bottom: 5px;
 }
+
 .event-title-container {
     display: flex;
     justify-content: space-between;
 }
+.event-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: large;
+
+}
 .event-title-container button {
     color: #c71d1d;
 }
+
+.a-button {
+    padding: 10px;
+    background: cornflowerblue;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+}
+
+.index-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center
+}
+.delete-button {
+    cursor: pointer;
+}
+.danger-button {
+    cursor: pointer;
+    background: #ea4335;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    text-decoration: none;
+}
+.event-actions a{
+    text-decoration: none;
+}
+.event-actions a:hover {
+   font-size: x-large;
+}
+.event-actions span:hover {
+    font-size: x-large;
+}
+.event-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn-submit {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+

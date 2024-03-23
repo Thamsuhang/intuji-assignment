@@ -1,5 +1,5 @@
 <?php
-require_once 'vendor/autoload.php'; // Include the Google API Client Library
+require_once 'vendor/autoload.php';
 session_start();
 if (isset($_SESSION['token']) && !empty($_SESSION['token'])) {
     $client = new Google_Client();
@@ -29,23 +29,39 @@ if (isset($_SESSION['token']) && !empty($_SESSION['token'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+            integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
 
 </head>
 <body>
-<section class="event-section">
+<div class="event-section-header">
     <h1>Your Events</h1>
+    <button class="btn-submit" id="open-modal-btn">Create Event</button>
+    <a class="danger-button" href="disconnect.php">Disconnect 🛇</a>
+</div>
+
+<section class="event-section">
+
     <div class="event-container">
         <?php if (!empty($events)): ?>
             <?php foreach (array_reverse($events->getItems()) as $event): ?>
-                <div class="event-card" id="etc-<?=$event->getId()?>">
-                    <div class="event-title-container" >
+                <div class="event-card" id="etc-<?= $event->getId() ?>">
+                    <div class="event-title-container">
                         <h3><?= $event->getSummary() ?></h3>
-                        <button class="delete-button" id="<?= $event->getId() ?>">Delete</button>
+                        <div class="event-actions">
+                            <a href="<?= $event->getHtmlLink() ?>">
+                                🔗
+                            </a>
+                            <span class="delete-button" id="<?= $event->getId() ?>">❌</span>
+
+                        </div>
+
                     </div>
 
                     <p><strong>Start:</strong> <?= date("F jS, Y h:i:a", strtotime($event->start->dateTime)); ?></p>
-                    <p><strong>Duration:</strong> <?= date("F jS, Y h:i:a", strtotime($event->end->dateTime)); ?></p>
+                    <p><strong>End:</strong> <?= date("F jS, Y h:i:a", strtotime($event->end->dateTime)); ?></p>
+
                     <p><strong>Description:</strong></p>
                     <p>
                         <?= $event->getDescription() ?>
@@ -57,12 +73,45 @@ if (isset($_SESSION['token']) && !empty($_SESSION['token'])) {
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-        <p>Sorry You do not have any events.</p>
+            <p>Sorry You do not have any events.</p>
         <?php endif; ?>
     </div>
 </section>
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="event-form">
+            <div class="form-group">
+                <label for="summary">Summary:</label>
+                <input type="text" id="summary" name="summary" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description">
+            </div>
+            <div class="form-group">
+                <label for="start">Start:</label>
+                <input type="datetime-local" id="start" name="start" required>
+            </div>
+            <div class="form-group">
+                <label for="end">End:</label>
+                <input type="datetime-local" id="end" name="end" required>
+            </div>
+            <div class="form-group">
+                <label for="attendees">Attendees (comma-separated emails):</label>
+                <input type="text" id="attendees" name="attendees">
+            </div>
+            <div class="event-actions">
+                <input type="submit" value="Submit" class="btn-submit">
+            </div>
+        </form>
+        <div id="response-message"></div>
+    </div>
+</div>
 
+<div id="modal-backdrop" class="modal-backdrop"></div>
 
+<div></div>
 <script src="custom.js"></script>
 </body>
 </html>
