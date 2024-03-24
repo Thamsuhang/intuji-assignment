@@ -29,6 +29,8 @@ if (isset($_SESSION['token']) && !empty($_SESSION['token'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"
             integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
@@ -36,9 +38,16 @@ if (isset($_SESSION['token']) && !empty($_SESSION['token'])) {
 </head>
 <body>
 <div class="event-section-header">
-    <h1>Your Events</h1>
-    <button class="btn-submit" id="open-modal-btn">Create Event</button>
-    <a class="danger-button" href="disconnect.php">Disconnect 🛇</a>
+    <div class="event-title-container">
+        <h1>Your </h1>
+        <img src="g_icon.svg" style="max-width: 50px">
+        <h1>Events</h1>
+    </div>
+    <div class="event-title-container ">
+        <a class="a-button" id="open-modal-btn">+</a>
+        <a class="a-button red" href="disconnect.php">🛇</a>
+    </div>
+
 </div>
 
 <section class="event-section">

@@ -3,7 +3,6 @@
 require_once 'vendor/autoload.php';
 session_start();
 
-// Set up the Google Client
 $client = new Google_Client();
 $time = new \Google\Service\Calendar\TimePeriod();
 
@@ -11,15 +10,12 @@ $client->setAuthConfig('config.json');
 $client->addScope(Google_Service_Calendar::CALENDAR);
 $client->setAccessToken($_SESSION['token']);
 
-// Create Calendar service
 $service = new Google_Service_Calendar($client);
 
-// Function to validate email address
 function isValidEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-// Process form data
 $summary = $_POST['summary'];
 $description = $_POST['description'];
 $start = $_POST['start'];

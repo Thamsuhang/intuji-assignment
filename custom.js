@@ -4,7 +4,6 @@ $(document).ready(function () {
     const closeButton = $(".close");
     const openModalButton = $("#open-modal-btn");
 
-    // delete functionality for events
     $('.delete-button').on('click', function () {
         const eventId = $(this).attr('id');
         const eventName = $('event-title-container h3').text();
@@ -16,7 +15,6 @@ $(document).ready(function () {
                 dataType: 'json',
                 success: function (response) {
                     if (response?.code == 200) {
-                        // Remove the deleted event card from the UI
                         $('#etc-' + eventId).remove();
                     }
                     alert(response?.message);
@@ -28,32 +26,25 @@ $(document).ready(function () {
         }
     });
 
-
-
-    // Function to open the modal
     function openModal() {
         modal.show();
         modalBackdrop.show();
     }
 
-    // Function to close the modal
     function closeModal() {
         modal.hide();
         modalBackdrop.hide();
         $("#event-form")[0].reset();
     }
 
-    // Event listener for the close button
     closeButton.on("click", function() {
         closeModal();
     });
 
-    // Event listener for the open modal button
     openModalButton.on("click", function() {
         openModal();
     });
 
-    // Close the modal when the user clicks outside of it
     $(document).on("click", function(event) {
         if ($(event.target).is(modalBackdrop)) {
             console.log('chec')
@@ -61,17 +52,14 @@ $(document).ready(function () {
         }
     });
 
-    // Form submission
     $("#event-form").submit(function(event) {
         event.preventDefault();
 
-        // Get form data
         var formData = $(this).serialize();
 
-        // Send AJAX request
         $.ajax({
             type: "POST",
-            url: "create_event.php", // Change to your PHP script that creates events
+            url: "create_event.php",
             data: formData,
             success: function(response) {
                 var res = JSON.parse(response);

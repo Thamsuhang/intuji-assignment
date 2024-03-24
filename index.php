@@ -1,9 +1,8 @@
 <?php
-require_once 'vendor/autoload.php'; // Include the Google API Client Library
+require_once 'vendor/autoload.php';
 session_start();
 
 if (isset($_GET['code'])) {
-    // Add values to the session.
     if (!isset($_SESSION['token'])) {
         $client = new Google_Client();
         $client->setAuthConfig('config.json');
@@ -13,8 +12,7 @@ if (isset($_GET['code'])) {
         $client->setRedirectUri($details->base_url . 'index.php');
         $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
 
-        // Start new or resume existing session.
-        $_SESSION['token'] = $token["access_token"]; // string
+        $_SESSION['token'] = $token["access_token"];
 
         header('Location: ' . filter_var($config->base_url . 'list_events.php', FILTER_SANITIZE_URL));
     }
@@ -25,11 +23,11 @@ if (isset($_GET['code'])) {
 <head>
     <title>Google Calendar Integration</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 <h1>Google Calendar Integration</h1>
 <div class="index-container">
-
     <?php if (isset($_SESSION['token']) && !empty($_SESSION['token'])): ?>
         <a class="a-button" href="list_events.php">List Events</a>
         <a class="a-button red" href="disconnect.php">Disconnect</a>
